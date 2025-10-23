@@ -1,0 +1,19 @@
+우분투에 samba 설치 후 윈도우에 링크걸기
+1. sudo nano /etc/samba/smb.conf
+ -> [log]
+       path = 로그파일위치
+       valid users = 우분투 아이디
+       read only = no
+       writable = yes
+       browsable = yes
+       guest ok = no
+       create mask = 0777
+       directory maks = 0777
+2. 윈도우 cmd 창 열고
+2.1. net use 원하는드라이브: \\우분투IP\log /persistent:yes
+    ex) net use D: \\192.168.0.1\log /persistent:yes 
+       -> log 의 경우 1번의 [log]이므로
+2.2 net use \\우분투IP\log /user:우분투아이디 우분투패스워드
+    ex) net use \\192.168.0.1\log /user:admin password
+2.3 mklink /D 원하는윈도우의 파일위치 드라이브
+    ex) mklink /D D:\log D:\
